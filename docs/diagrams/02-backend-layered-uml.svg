@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Backend Layered UML</title>
+  <desc id="desc">Layered UML style diagram of backend packages and dependencies.</desc>
+  <defs>
+    <style>
+      .pkg { fill: var(--card); stroke: var(--line); stroke-width: 2.2; rx: 14; ry: 14; }
+      .head { fill: var(--text); font: 700 24px 'Segoe UI', Arial, sans-serif; }
+      .item { fill: var(--muted); font: 500 18px 'Segoe UI', Arial, sans-serif; }
+      .line { stroke: var(--line); stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .title { fill: var(--text); font: 700 30px 'Segoe UI', Arial, sans-serif; }
+      :root { --text: #0f172a; --muted: #334155; --line: #1e293b; --card: rgba(255,255,255,0.08); }
+      @media (prefers-color-scheme: dark) {
+        :root { --text: #e2e8f0; --muted: #94a3b8; --line: #cbd5e1; --card: rgba(255,255,255,0.03); }
+      }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="var(--line)" />
+    </marker>
+  </defs>
+
+  <text x="70" y="70" class="title">Backend Layered UML</text>
+
+  <rect x="70" y="120" width="1260" height="140" class="pkg" />
+  <text x="100" y="170" class="head">Adapter Layer: main.go + Wails bindings</text>
+  <text x="100" y="205" class="item">Bound methods: Login, Project CRUD, Issue CRUD, Workflow, Members, Comments</text>
+  <text x="100" y="235" class="item">Request/response marshaling between UI and services</text>
+
+  <rect x="70" y="300" width="1260" height="180" class="pkg" />
+  <text x="100" y="350" class="head">Application Layer: internal/app + internal/services</text>
+  <text x="100" y="385" class="item">Session context (current user), service orchestration, role enforcement</text>
+  <text x="100" y="415" class="item">AuthService, ProjectService, IssueService, WorkflowService</text>
+  <text x="100" y="445" class="item">Audit pipeline + workflow transition validation</text>
+
+  <rect x="70" y="520" width="610" height="230" class="pkg" />
+  <text x="100" y="570" class="head">Domain Layer: internal/domain + permissions + workflow</text>
+  <text x="100" y="605" class="item">Entities: User, Project, Issue, Comment, Workflow, Member</text>
+  <text x="100" y="635" class="item">DTOs, app errors, RBAC rules, workflow engine</text>
+  <text x="100" y="665" class="item">No UI / storage dependency</text>
+
+  <rect x="720" y="520" width="610" height="230" class="pkg" />
+  <text x="750" y="570" class="head">Repository Layer: internal/repository/sqlite + internal/db</text>
+  <text x="750" y="605" class="item">SQLx repositories with migrations and seed users</text>
+  <text x="750" y="635" class="item">SQLite parsing/normalization and persistence concerns</text>
+  <text x="750" y="665" class="item">Local file database: %APPDATA%/indus-task/indus-task.db</text>
+
+  <path d="M700 260 L700 300" class="line" />
+  <path d="M420 480 L420 520" class="line" />
+  <path d="M980 480 L980 520" class="line" />
+  <path d="M620 635 L720 635" class="line" />
+</svg>

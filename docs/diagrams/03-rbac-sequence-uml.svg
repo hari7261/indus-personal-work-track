@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900" role="img" aria-labelledby="title desc">
+  <title id="title">RBAC Login and Action Sequence</title>
+  <desc id="desc">Sequence diagram showing login and permission checks before write operations.</desc>
+  <defs>
+    <style>
+      .title { fill: var(--text); font: 700 30px 'Segoe UI', Arial, sans-serif; }
+      .actor { fill: var(--text); font: 700 20px 'Segoe UI', Arial, sans-serif; text-anchor: middle; }
+      .line { stroke: var(--line); stroke-width: 2; }
+      .msg { stroke: var(--line); stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .label { fill: var(--muted); font: 500 16px 'Segoe UI', Arial, sans-serif; }
+      .box { fill: var(--card); stroke: var(--line); stroke-width: 2; rx: 12; ry: 12; }
+      :root { --text: #0f172a; --muted: #334155; --line: #1e293b; --card: rgba(255,255,255,0.08); }
+      @media (prefers-color-scheme: dark) {
+        :root { --text: #e2e8f0; --muted: #94a3b8; --line: #cbd5e1; --card: rgba(255,255,255,0.03); }
+      }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="var(--line)" />
+    </marker>
+  </defs>
+
+  <text x="70" y="70" class="title">RBAC Sequence (Login + Protected Action)</text>
+
+  <rect x="110" y="100" width="180" height="52" class="box" />
+  <rect x="400" y="100" width="240" height="52" class="box" />
+  <rect x="750" y="100" width="240" height="52" class="box" />
+  <rect x="1100" y="100" width="250" height="52" class="box" />
+
+  <text x="200" y="135" class="actor">User</text>
+  <text x="520" y="135" class="actor">Frontend (React)</text>
+  <text x="870" y="135" class="actor">Go Services</text>
+  <text x="1225" y="135" class="actor">SQLite Repos</text>
+
+  <line x1="200" y1="160" x2="200" y2="840" class="line" />
+  <line x1="520" y1="160" x2="520" y2="840" class="line" />
+  <line x1="870" y1="160" x2="870" y2="840" class="line" />
+  <line x1="1225" y1="160" x2="1225" y2="840" class="line" />
+
+  <path d="M210 210 L510 210" class="msg" />
+  <text x="250" y="198" class="label">1. Submit username (admin/developer/reporter)</text>
+
+  <path d="M530 260 L860 260" class="msg" />
+  <text x="580" y="248" class="label">2. Login(username)</text>
+
+  <path d="M880 310 L1215 310" class="msg" />
+  <text x="930" y="298" class="label">3. SELECT user by username</text>
+
+  <path d="M1215 350 L880 350" class="msg" />
+  <text x="930" y="338" class="label">4. user row returned</text>
+
+  <path d="M860 400 L530 400" class="msg" />
+  <text x="560" y="388" class="label">5. set session role + return current user</text>
+
+  <path d="M510 450 L210 450" class="msg" />
+  <text x="250" y="438" class="label">6. Login success, dashboard opens</text>
+
+  <path d="M210 530 L510 530" class="msg" />
+  <text x="250" y="518" class="label">7. User attempts protected action (ex: Create Project)</text>
+
+  <path d="M530 580 L860 580" class="msg" />
+  <text x="580" y="568" class="label">8. Service validates permission checker</text>
+
+  <rect x="790" y="605" width="160" height="80" class="box" />
+  <text x="805" y="635" class="label">if role != admin</text>
+  <text x="805" y="660" class="label">FORBIDDEN</text>
+
+  <path d="M860 720 L530 720" class="msg" />
+  <text x="560" y="708" class="label">9a. error OR 9b. success payload</text>
+
+  <path d="M510 770 L210 770" class="msg" />
+  <text x="250" y="758" class="label">10. UI renders message and updated state</text>
+</svg>

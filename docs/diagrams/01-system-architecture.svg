@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="860" viewBox="0 0 1400 860" role="img" aria-labelledby="title desc">
+  <title id="title">System Architecture Overview</title>
+  <desc id="desc">High-level architecture showing user interface, application services, domain logic and SQLite storage.</desc>
+  <defs>
+    <style>
+      .line { stroke: var(--line); stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .node { fill: var(--card); stroke: var(--line); stroke-width: 2.5; rx: 18; ry: 18; }
+      .title { fill: var(--text); font: 700 30px 'Segoe UI', Arial, sans-serif; }
+      .label { fill: var(--text); font: 600 24px 'Segoe UI', Arial, sans-serif; }
+      .meta { fill: var(--muted); font: 500 18px 'Segoe UI', Arial, sans-serif; }
+      .accent { fill: var(--accent); }
+      :root { --text: #0f172a; --muted: #334155; --line: #0f172a; --card: rgba(255,255,255,0.08); --accent: #0369a1; }
+      @media (prefers-color-scheme: dark) {
+        :root { --text: #e2e8f0; --muted: #94a3b8; --line: #cbd5e1; --card: rgba(255,255,255,0.03); --accent: #38bdf8; }
+      }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="var(--line)" />
+    </marker>
+  </defs>
+
+  <text x="70" y="80" class="title">Indus Personal Work Track: Architecture</text>
+
+  <rect x="70" y="140" width="280" height="160" class="node" />
+  <text x="100" y="200" class="label">User (Desktop)</text>
+  <text x="100" y="235" class="meta">Windows app client</text>
+  <text x="100" y="265" class="meta">Admin / Developer / Reporter</text>
+
+  <rect x="430" y="120" width="360" height="220" class="node" />
+  <text x="460" y="185" class="label">Wails + React Frontend</text>
+  <text x="460" y="220" class="meta">UI pages, forms, state context</text>
+  <text x="460" y="250" class="meta">Local app, no external server</text>
+  <circle cx="740" cy="165" r="10" class="accent" />
+
+  <rect x="880" y="120" width="430" height="220" class="node" />
+  <text x="910" y="185" class="label">Go App Adapter (main.go)</text>
+  <text x="910" y="220" class="meta">Wails bound methods</text>
+  <text x="910" y="250" class="meta">Input marshalling + response mapping</text>
+
+  <rect x="430" y="420" width="430" height="270" class="node" />
+  <text x="460" y="480" class="label">Application Services</text>
+  <text x="460" y="515" class="meta">AuthService • ProjectService • IssueService</text>
+  <text x="460" y="545" class="meta">WorkflowService • Permission checks</text>
+  <text x="460" y="575" class="meta">Audit event generation</text>
+
+  <rect x="910" y="420" width="400" height="120" class="node" />
+  <text x="940" y="480" class="label">Domain Layer</text>
+  <text x="940" y="515" class="meta">Models, DTOs, app errors, roles</text>
+
+  <rect x="910" y="570" width="400" height="120" class="node" />
+  <text x="940" y="630" class="label">SQLite Repository Layer</text>
+  <text x="940" y="665" class="meta">SQLx repositories + migrations</text>
+
+  <rect x="910" y="720" width="400" height="90" class="node" />
+  <text x="940" y="775" class="label">Local SQLite Database File</text>
+
+  <path d="M350 220 L430 220" class="line" />
+  <path d="M790 220 L880 220" class="line" />
+  <path d="M610 340 L610 420" class="line" />
+  <path d="M860 555 L910 500" class="line" />
+  <path d="M1120 540 L1120 570" class="line" />
+  <path d="M1120 690 L1120 720" class="line" />
+</svg>

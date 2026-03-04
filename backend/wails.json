@@ -1,0 +1,24 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "indus-task-manager",
+  "outputfilename": "IndusTaskManager",
+  "frontend": "frontend",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "Indus Team",
+    "email": "team@indus.local"
+  },
+  "version": "1.1.0",
+  "info": {
+    "companyName": "Indus Personal Work Track",
+    "productName": "Indus Personal Work Track",
+    "productVersion": "1.1.0",
+    "copyright": "Copyright (c) 2026 Hariom Kumar",
+    "comments": "Offline-first project and issue tracker for personal and team workflows."
+  },
+  "outputType": "desktop",
+  "wailsjsdir": "frontend/src/api"
+}

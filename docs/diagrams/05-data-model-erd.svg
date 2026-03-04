@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Core Data Model ERD</title>
+  <desc id="desc">Entity relationship diagram for users, projects, issues, comments, workflows and audit logs.</desc>
+  <defs>
+    <style>
+      .title { fill: var(--text); font: 700 30px 'Segoe UI', Arial, sans-serif; }
+      .entity { fill: var(--card); stroke: var(--line); stroke-width: 2.2; rx: 10; ry: 10; }
+      .head { fill: var(--text); font: 700 22px 'Segoe UI', Arial, sans-serif; }
+      .field { fill: var(--muted); font: 500 16px 'Consolas', 'Courier New', monospace; }
+      .rel { stroke: var(--line); stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .rlabel { fill: var(--muted); font: 500 14px 'Segoe UI', Arial, sans-serif; }
+      :root { --text: #0f172a; --muted: #334155; --line: #1e293b; --card: rgba(255,255,255,0.08); }
+      @media (prefers-color-scheme: dark) {
+        :root { --text: #e2e8f0; --muted: #94a3b8; --line: #cbd5e1; --card: rgba(255,255,255,0.03); }
+      }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="var(--line)" />
+    </marker>
+  </defs>
+
+  <text x="70" y="70" class="title">Core Data Model (ERD)</text>
+
+  <rect x="70" y="130" width="280" height="220" class="entity" />
+  <text x="90" y="170" class="head">users</text>
+  <text x="90" y="205" class="field">PK id</text>
+  <text x="90" y="230" class="field">username (unique)</text>
+  <text x="90" y="255" class="field">role</text>
+  <text x="90" y="280" class="field">created_at</text>
+
+  <rect x="430" y="130" width="320" height="250" class="entity" />
+  <text x="450" y="170" class="head">projects</text>
+  <text x="450" y="205" class="field">PK id</text>
+  <text x="450" y="230" class="field">name</text>
+  <text x="450" y="255" class="field">description</text>
+  <text x="450" y="280" class="field">created_at</text>
+  <text x="450" y="305" class="field">updated_at</text>
+
+  <rect x="830" y="110" width="340" height="320" class="entity" />
+  <text x="850" y="150" class="head">issues</text>
+  <text x="850" y="185" class="field">PK id</text>
+  <text x="850" y="210" class="field">FK project_id -&gt; projects.id</text>
+  <text x="850" y="235" class="field">FK assignee_id -&gt; users.id</text>
+  <text x="850" y="260" class="field">FK created_by -&gt; users.id</text>
+  <text x="850" y="285" class="field">title, description, status</text>
+  <text x="850" y="310" class="field">priority, is_incident, severity</text>
+  <text x="850" y="335" class="field">created_at, updated_at</text>
+
+  <rect x="1250" y="130" width="280" height="220" class="entity" />
+  <text x="1270" y="170" class="head">comments</text>
+  <text x="1270" y="205" class="field">PK id</text>
+  <text x="1270" y="230" class="field">FK issue_id -&gt; issues.id</text>
+  <text x="1270" y="255" class="field">FK user_id -&gt; users.id</text>
+  <text x="1270" y="280" class="field">content</text>
+  <text x="1270" y="305" class="field">created_at</text>
+
+  <rect x="410" y="500" width="360" height="320" class="entity" />
+  <text x="430" y="540" class="head">workflow tables</text>
+  <text x="430" y="575" class="field">workflows: PK id, FK project_id</text>
+  <text x="430" y="600" class="field">workflow_states: PK id, FK workflow_id</text>
+  <text x="430" y="625" class="field">name, is_initial, is_final</text>
+  <text x="430" y="650" class="field">workflow_transitions: PK id</text>
+  <text x="430" y="675" class="field">FK workflow_id, from_state_id, to_state_id</text>
+  <text x="430" y="700" class="field">name</text>
+
+  <rect x="850" y="520" width="330" height="280" class="entity" />
+  <text x="870" y="560" class="head">project_members</text>
+  <text x="870" y="595" class="field">PK id</text>
+  <text x="870" y="620" class="field">FK project_id -&gt; projects.id</text>
+  <text x="870" y="645" class="field">FK user_id -&gt; users.id</text>
+  <text x="870" y="670" class="field">role</text>
+  <text x="870" y="695" class="field">created_at</text>
+
+  <rect x="1240" y="500" width="300" height="280" class="entity" />
+  <text x="1260" y="540" class="head">audit_logs</text>
+  <text x="1260" y="575" class="field">PK id</text>
+  <text x="1260" y="600" class="field">entity_type, entity_id, action</text>
+  <text x="1260" y="625" class="field">FK user_id -&gt; users.id</text>
+  <text x="1260" y="650" class="field">old_value, new_value</text>
+  <text x="1260" y="675" class="field">created_at</text>
+
+  <path d="M350 220 L430 220" class="rel" />
+  <text x="370" y="206" class="rlabel">admin creates</text>
+
+  <path d="M750 255 L830 255" class="rel" />
+  <text x="770" y="241" class="rlabel">1:N</text>
+
+  <path d="M1170 245 L1250 245" class="rel" />
+  <text x="1190" y="231" class="rlabel">1:N</text>
+
+  <path d="M950 430 L950 520" class="rel" />
+  <text x="965" y="468" class="rlabel">project/user roles</text>
+
+  <path d="M590 380 L590 500" class="rel" />
+  <text x="606" y="445" class="rlabel">workflow per project</text>
+
+  <path d="M1130 350 L1290 500" class="rel" />
+  <text x="1190" y="420" class="rlabel">auditable events</text>
+
+  <path d="M190 350 L860 520" class="rel" />
+  <text x="350" y="450" class="rlabel">users linked to memberships</text>
+</svg>
